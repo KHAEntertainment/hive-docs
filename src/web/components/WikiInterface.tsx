@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Document } from '../../shared/types.js';
+import { Document, HiveDocsConfig, MarkdownFile, ImportOptions, ImportResult } from '../../shared/types.js';
 import { DocumentList } from './DocumentList.js';
 import { DocumentEditor } from './DocumentEditor.js';
 import { SearchInterface } from './SearchInterface.js';
+import { ImportDialog } from './ImportDialog.js';
+import { ConfigurationPanel } from './ConfigurationPanel.js';
+import { MCPSetupPanel } from './MCPSetupPanel.js';
 import './WikiInterface.css';
 
 interface WikiInterfaceProps {
@@ -15,6 +18,11 @@ interface WikiInterfaceProps {
   onSearch: (query: string) => void;
   searchResults: Document[];
   isSearching: boolean;
+  onImport?: (files: MarkdownFile[], options: ImportOptions) => Promise<ImportResult>;
+  onScanWorkspace?: () => Promise<MarkdownFile[]>;
+  config?: HiveDocsConfig;
+  onConfigUpdate?: (config: Partial<HiveDocsConfig>) => Promise<void>;
+  mcpServerPort?: number;
 }
 
 export const WikiInterface: React.FC<WikiInterfaceProps> = ({
@@ -26,10 +34,18 @@ export const WikiInterface: React.FC<WikiInterfaceProps> = ({
   onDocumentDelete,
   onSearch,
   searchResults,
-  isSearching
+  isSearching,
+  onImport,
+  onScanWorkspace,
+  config,
+  onConfigUpdate,
+  mcpServerPort
 }) => {
   const [sidebarWidth, setSidebarWidth] = useState(300);
   const [isResizing, setIsResizing] = useState(false);
+  const [showImportDialog, setShowImportDialog] = useState(false);
+  const [showConfigPanel, setShowConfigPanel] = useState(false);
+  const [showMCPSetup, setShowMCPSetup] = useState(false);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsResizing(true);
@@ -77,21 +93,21 @@ export const WikiInterface: React.FC<WikiInterfaceProps> = ({
             </button>
             <button 
               className="action-btn secondary"
-              onClick={() => {/* TODO: Open import dialog */}}
+              onClick={() => setShowImportDialog(true)}
               title="Import markdown files"
             >
               Import
             </button>
             <button 
               className="action-btn secondary"
-              onClick={() => {/* TODO: Open config panel */}}
+              onClick={() => setShowConfigPanel(true)}
               title="Configuration"
             >
               ⚙️
             </button>
             <button 
               className="action-btn secondary"
-              onClick={() => {/* TODO: Open MCP setup */}}
+              onClick={() => setShowMCPSetup(true)}
               title="MCP Setup"
             >
               🔗
@@ -131,6 +147,29 @@ export const WikiInterface: React.FC<WikiInterfaceProps> = ({
           </div>
         )}
       </div>
+      {showImportDialog && (
+        <ImportDialog
+          isOpen={showImportDialog}
+          onClose={() => setShowImportDialog(false)}
+          onImport={onImport || (async () => ({ imported: 0, skipped: 0, errors: [] }))}
+          onScanWorkspace={onScanWorkspace || (async () => [])}
+        />
+      )}
+      {showConfigPanel && config && (
+        <ConfigurationPanel
+          isOpen={showConfigPanel}
+          onClose={() => setShowConfigPanel(false)}
+          config={config}
+          onConfigUpdate={onConfigUpdate || (async () => {})}
+        />
+      )}
+      {showMCPSetup && (
+        <MCPSetupPanel
+          isOpen={showMCPSetup}
+          onClose={() => setShowMCPSetup(false)}
+          serverPort={mcpServerPort || 3000}
+        />
+      )}
     </div>
   );
 };

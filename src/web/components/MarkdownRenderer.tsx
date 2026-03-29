@@ -15,17 +15,21 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Configure marked with syntax highlighting
-    marked.setOptions({
-      highlight: (code, lang) => {
-        if (lang && hljs.getLanguage(lang)) {
-          try {
-            return hljs.highlight(code, { language: lang }).value;
-          } catch (error) {
-            console.warn('Syntax highlighting failed:', error);
+    // Configure marked with syntax highlighting via extension
+    marked.use({
+      renderer: {
+        code({ text, lang }: { text: string; lang?: string }): string {
+          if (lang && hljs.getLanguage(lang)) {
+            try {
+              const highlighted = hljs.highlight(text, { language: lang }).value;
+              return `<pre><code class="hljs language-${lang}">${highlighted}</code></pre>`;
+            } catch {
+              // Fall through to auto-highlight
+            }
           }
+          const highlighted = hljs.highlightAuto(text).value;
+          return `<pre><code class="hljs">${highlighted}</code></pre>`;
         }
-        return hljs.highlightAuto(code).value;
       },
       breaks: true,
       gfm: true
