@@ -1,0 +1,93 @@
+:root {
+  font-family: var(--vscode-font-family, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+  line-height: 1.5;
+  font-weight: 400;
+  
+  color-scheme: light dark;
+  color: var(--vscode-editor-foreground, #d4d4d4);
+  background-color: var(--vscode-editor-background, #1e1e1e);
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* VS Code theme variables fallbacks */
+@media (prefers-color-scheme: light) {
+  :root {
+    --vscode-editor-foreground: #333333;
+    --vscode-editor-background: #ffffff;
+    --vscode-sideBar-background: #f3f3f3;
+    --vscode-sideBar-border: #e5e5e5;
+    --vscode-sideBarSectionHeader-background: #e8e8e8;
+    --vscode-sideBarTitle-foreground: #333333;
+    --vscode-button-background: #0078d4;
+    --vscode-button-foreground: #ffffff;
+    --vscode-button-hoverBackground: #106ebe;
+    --vscode-focusBorder: #007acc;
+    --vscode-input-background: #ffffff;
+    --vscode-input-border: #d1d1d1;
+    --vscode-input-foreground: #333333;
+    --vscode-input-placeholderForeground: #666666;
+    --vscode-list-foreground: #333333;
+    --vscode-list-hoverBackground: #f0f0f0;
+    --vscode-list-activeSelectionBackground: #0078d4;
+    --vscode-list-activeSelectionForeground: #ffffff;
+    --vscode-descriptionForeground: #666666;
+    --vscode-editorGroup-border: #e5e5e5;
+    --vscode-editorGroupHeader-tabsBackground: #f8f8f8;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --vscode-editor-foreground: #d4d4d4;
+    --vscode-editor-background: #1e1e1e;
+    --vscode-sideBar-background: #252526;
+    --vscode-sideBar-border: #2b2b2b;
+    --vscode-sideBarSectionHeader-background: #2d2d30;
+    --vscode-sideBarTitle-foreground: #cccccc;
+    --vscode-button-background: #0e639c;
+    --vscode-button-foreground: #ffffff;
+    --vscode-button-hoverBackground: #1177bb;
+    --vscode-focusBorder: #007acc;
+    --vscode-input-background: #3c3c3c;
+    --vscode-input-border: #3c3c3c;
+    --vscode-input-foreground: #cccccc;
+    --vscode-input-placeholderForeground: #cccccc99;
+    --vscode-list-foreground: #cccccc;
+    --vscode-list-hoverBackground: #2a2d2e;
+    --vscode-list-activeSelectionBackground: #094771;
+    --vscode-list-activeSelectionForeground: #ffffff;
+    --vscode-descriptionForeground: #cccccc99;
+    --vscode-editorGroup-border: #2b2b2b;
+    --vscode-editorGroupHeader-tabsBackground: #2d2d30;
+  }
+}

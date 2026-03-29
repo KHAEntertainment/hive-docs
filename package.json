@@ -1,0 +1,277 @@
+{
+  "name": "hive-docs",
+  "version": "0.1.0",
+  "publisher": "hive-docs-team",
+  "description": "VS Code extension for centralized wiki-style documentation management",
+  "main": "dist/extension.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:web\" \"npm run dev:extension\"",
+    "dev:web": "vite --config vite.config.web.ts",
+    "dev:extension": "webpack --mode development --watch --config webpack.extension.js",
+    "build": "npm run build:web && npm run build:extension",
+    "build:web": "vite build --config vite.config.web.ts",
+    "build:extension": "webpack --mode production --config webpack.extension.js",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:extension": "node ./dist/extension/test/runTest.js",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "package": "vsce package",
+    "vscode:prepublish": "npm run build"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "icon": "assets/128x128.png",
+  "activationEvents": [
+    "onCommand:hive-docs.open"
+  ],
+  "contributes": {
+    "views": {
+      "panel": [
+        {
+          "id": "hive-docs.webview",
+          "name": "Hive Docs",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "hive-docs.open",
+        "title": "Open Hive Docs",
+        "category": "Hive Docs",
+        "icon": "$(book)"
+      },
+      {
+        "command": "hive-docs.refresh",
+        "title": "Refresh",
+        "category": "Hive Docs",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "hive-docs.import",
+        "title": "Import Markdown Files",
+        "category": "Hive Docs",
+        "icon": "$(file-add)"
+      },
+      {
+        "command": "hive-docs.newDocument",
+        "title": "New Document",
+        "category": "Hive Docs",
+        "icon": "$(add)"
+      },
+      {
+        "command": "hive-docs.search",
+        "title": "Search Documents",
+        "category": "Hive Docs",
+        "icon": "$(search)"
+      },
+      {
+        "command": "hive-docs.quickOpen",
+        "title": "Quick Open Document",
+        "category": "Hive Docs",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "hive-docs.export",
+        "title": "Export Documents",
+        "category": "Hive Docs",
+        "icon": "$(export)"
+      },
+      {
+        "command": "hive-docs.openSettings",
+        "title": "Open Settings",
+        "category": "Hive Docs",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "hive-docs.mcpStatus",
+        "title": "MCP Server Status",
+        "category": "Hive Docs",
+        "icon": "$(server-process)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "hive-docs.refresh",
+          "when": "view == hive-docs.webview",
+          "group": "navigation"
+        },
+        {
+          "command": "hive-docs.newDocument",
+          "when": "view == hive-docs.webview",
+          "group": "navigation"
+        },
+        {
+          "command": "hive-docs.import",
+          "when": "view == hive-docs.webview",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "hive-docs.open",
+          "when": "hive-docs:enabled"
+        },
+        {
+          "command": "hive-docs.refresh",
+          "when": "hive-docs:enabled"
+        },
+        {
+          "command": "hive-docs.import",
+          "when": "hive-docs:enabled"
+        },
+        {
+          "command": "hive-docs.newDocument",
+          "when": "hive-docs:enabled"
+        },
+        {
+          "command": "hive-docs.search",
+          "when": "hive-docs:enabled"
+        },
+        {
+          "command": "hive-docs.quickOpen",
+          "when": "hive-docs:enabled"
+        },
+        {
+          "command": "hive-docs.export",
+          "when": "hive-docs:enabled"
+        },
+        {
+          "command": "hive-docs.openSettings",
+          "when": "hive-docs:enabled"
+        },
+        {
+          "command": "hive-docs.mcpStatus",
+          "when": "hive-docs:enabled"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "hive-docs.import",
+          "when": "resourceExtname == .md",
+          "group": "hive-docs"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "hive-docs.open",
+        "key": "ctrl+shift+h",
+        "mac": "cmd+shift+h",
+        "when": "hive-docs:enabled"
+      },
+      {
+        "command": "hive-docs.search",
+        "key": "ctrl+shift+f",
+        "mac": "cmd+shift+f",
+        "when": "hive-docs:enabled && activeViewlet == 'workbench.view.extension.hive-docs'"
+      },
+      {
+        "command": "hive-docs.quickOpen",
+        "key": "ctrl+p",
+        "mac": "cmd+p",
+        "when": "hive-docs:enabled && activeViewlet == 'workbench.view.extension.hive-docs'"
+      },
+      {
+        "command": "hive-docs.newDocument",
+        "key": "ctrl+n",
+        "mac": "cmd+n",
+        "when": "hive-docs:enabled && activeViewlet == 'workbench.view.extension.hive-docs'"
+      }
+    ],
+    "configuration": {
+      "title": "Hive Docs",
+      "properties": {
+        "hive-docs.database.path": {
+          "type": "string",
+          "description": "Path to the SQLite database file",
+          "default": ""
+        },
+        "hive-docs.database.autoBackup": {
+          "type": "boolean",
+          "description": "Automatically backup database",
+          "default": true
+        },
+        "hive-docs.import.ignoreRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Custom ignore rules for file import",
+          "default": []
+        },
+        "hive-docs.git.ignoreDatabase": {
+          "type": "boolean",
+          "description": "Add database files to .gitignore",
+          "default": true
+        },
+        "hive-docs.mcp.enabled": {
+          "type": "boolean",
+          "description": "Enable MCP server for AI agent integration",
+          "default": true
+        },
+        "hive-docs.mcp.port": {
+          "type": "number",
+          "description": "Port for MCP server",
+          "default": 3000
+        },
+        "hive-docs.mcp.autoStart": {
+          "type": "boolean",
+          "description": "Automatically start MCP server on extension activation",
+          "default": true
+        },
+        "hive-docs.ui.sidebarVisible": {
+          "type": "boolean",
+          "description": "Show sidebar in the interface",
+          "default": true
+        },
+        "hive-docs.ui.previewMode": {
+          "type": "string",
+          "enum": ["side", "tab"],
+          "description": "Markdown preview mode",
+          "default": "side"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/marked": "^5.0.2",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "@vscode/test-electron": "^2.3.0",
+    "@vscode/vsce": "^2.19.0",
+    "concurrently": "^8.0.0",
+    "eslint": "^8.0.0",
+    "mocha": "^10.0.0",
+    "ts-loader": "^9.4.0",
+    "typescript": "^5.0.0",
+    "vite": "^4.0.0",
+    "vitest": "^0.34.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.3",
+    "express": "^4.18.0",
+    "glob": "^11.0.3",
+    "highlight.js": "^11.11.1",
+    "marked": "^16.1.2",
+    "minimatch": "^10.0.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "sqlite3": "^5.1.0"
+  }
+}

@@ -1,0 +1,161 @@
+.markdown-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--vscode-editor-background, #1e1e1e);
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--vscode-editorGroup-border, #2b2b2b);
+  background-color: var(--vscode-editorGroupHeader-tabsBackground, #2d2d30);
+  flex-wrap: wrap;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 8px;
+  border-right: 1px solid var(--vscode-editorGroup-border, #2b2b2b);
+}
+
+.toolbar-group:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.toolbar-btn {
+  background: none;
+  border: none;
+  color: var(--vscode-button-secondaryForeground, #cccccc);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-btn:hover {
+  background-color: var(--vscode-toolbar-hoverBackground, #ffffff1a);
+  color: var(--vscode-button-foreground, #ffffff);
+}
+
+.toolbar-btn:active {
+  background-color: var(--vscode-toolbar-activeBackground, #ffffff2a);
+}
+
+.toolbar-btn strong {
+  font-weight: 700;
+}
+
+.toolbar-btn em {
+  font-style: italic;
+}
+
+.editor-textarea {
+  flex: 1;
+  width: 100%;
+  background-color: var(--vscode-editor-background, #1e1e1e);
+  color: var(--vscode-editor-foreground, #d4d4d4);
+  border: none;
+  outline: none;
+  padding: 16px 20px;
+  font-family: var(--vscode-editor-font-family, 'Consolas', 'Courier New', monospace);
+  font-size: var(--vscode-editor-font-size, 14px);
+  line-height: 1.6;
+  resize: none;
+  tab-size: 2;
+}
+
+.editor-textarea::placeholder {
+  color: var(--vscode-input-placeholderForeground, #cccccc99);
+}
+
+.editor-textarea:focus {
+  outline: none;
+}
+
+/* Scrollbar styling */
+.editor-textarea::-webkit-scrollbar {
+  width: 12px;
+}
+
+.editor-textarea::-webkit-scrollbar-track {
+  background: var(--vscode-scrollbarSlider-background, #79797966);
+}
+
+.editor-textarea::-webkit-scrollbar-thumb {
+  background: var(--vscode-scrollbarSlider-background, #79797966);
+  border-radius: 6px;
+}
+
+.editor-textarea::-webkit-scrollbar-thumb:hover {
+  background: var(--vscode-scrollbarSlider-hoverBackground, #646464b3);
+}
+
+/* Responsive toolbar for smaller screens */
+@media (max-width: 768px) {
+  .editor-toolbar {
+    padding: 6px 8px;
+    gap: 4px;
+  }
+  
+  .toolbar-group {
+    gap: 2px;
+    padding-right: 6px;
+  }
+  
+  .toolbar-btn {
+    padding: 3px 6px;
+    font-size: 10px;
+    min-height: 20px;
+  }
+}
+
+/* Light theme support */
+@media (prefers-color-scheme: light) {
+  .markdown-editor {
+    background-color: #ffffff;
+  }
+  
+  .editor-toolbar {
+    background-color: #f8f8f8;
+    border-bottom-color: #e5e5e5;
+  }
+  
+  .toolbar-group {
+    border-right-color: #e5e5e5;
+  }
+  
+  .toolbar-btn {
+    color: #333333;
+  }
+  
+  .toolbar-btn:hover {
+    background-color: #f0f0f0;
+    color: #333333;
+  }
+  
+  .toolbar-btn:active {
+    background-color: #e0e0e0;
+  }
+  
+  .editor-textarea {
+    background-color: #ffffff;
+    color: #333333;
+  }
+  
+  .editor-textarea::placeholder {
+    color: #666666;
+  }
+}

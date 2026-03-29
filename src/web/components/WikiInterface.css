@@ -1,0 +1,220 @@
+.wiki-interface {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--vscode-editor-background, #1e1e1e);
+  color: var(--vscode-editor-foreground, #d4d4d4);
+  font-family: var(--vscode-font-family, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+  font-size: var(--vscode-font-size, 13px);
+}
+
+.wiki-sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--vscode-sideBar-background, #252526);
+  border-right: 1px solid var(--vscode-sideBar-border, #2b2b2b);
+  min-width: 200px;
+  max-width: 600px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--vscode-sideBar-border, #2b2b2b);
+  background-color: var(--vscode-sideBarSectionHeader-background, #2d2d30);
+  gap: 12px;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vscode-sideBarTitle-foreground, #cccccc);
+  flex: 1;
+  min-width: 0;
+}
+
+.logo-container {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.app-logo {
+  height: 28px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.header-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.action-btn {
+  background-color: var(--vscode-button-background, #0e639c);
+  color: var(--vscode-button-foreground, #ffffff);
+  border: none;
+  border-radius: 3px;
+  padding: 6px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background-color: var(--vscode-button-hoverBackground, #1177bb);
+}
+
+.action-btn:active {
+  background-color: var(--vscode-button-activeBackground, #0e639c);
+}
+
+.action-btn.secondary {
+  background-color: var(--vscode-button-secondaryBackground, #3c3c3c);
+  color: var(--vscode-button-secondaryForeground, #cccccc);
+}
+
+.action-btn.secondary:hover {
+  background-color: var(--vscode-button-secondaryHoverBackground, #4a4a4a);
+}
+
+.wiki-resizer {
+  width: 4px;
+  background-color: var(--vscode-sideBar-border, #2b2b2b);
+  cursor: col-resize;
+  transition: background-color 0.2s;
+}
+
+.wiki-resizer:hover {
+  background-color: var(--vscode-focusBorder, #007acc);
+}
+
+.wiki-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--vscode-editor-background, #1e1e1e);
+  overflow: hidden;
+}
+
+.wiki-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: var(--vscode-descriptionForeground, #cccccc99);
+}
+
+.wiki-welcome h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--vscode-editor-foreground, #d4d4d4);
+}
+
+.welcome-logo {
+  height: 64px;
+  width: auto;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.wiki-welcome p {
+  margin: 0;
+  font-size: 14px;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments for landscape layout */
+@media (max-height: 600px) {
+  .sidebar-header {
+    padding: 8px 12px;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 13px;
+  }
+  
+  .app-logo {
+    height: 24px;
+  }
+  
+  .welcome-logo {
+    height: 48px;
+    margin-bottom: 16px;
+  }
+  
+  .new-document-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+/* Light theme support */
+@media (prefers-color-scheme: light) {
+  .wiki-interface {
+    background-color: #ffffff;
+    color: #333333;
+  }
+  
+  .wiki-sidebar {
+    background-color: #f3f3f3;
+    border-right-color: #e5e5e5;
+  }
+  
+  .sidebar-header {
+    background-color: #e8e8e8;
+    border-bottom-color: #e5e5e5;
+  }
+  
+  .sidebar-header h2 {
+    color: #333333;
+  }
+  
+  .action-btn {
+    background-color: #0078d4;
+  }
+  
+  .action-btn:hover {
+    background-color: #106ebe;
+  }
+  
+  .action-btn.secondary {
+    background-color: #e1e1e1;
+    color: #333333;
+  }
+  
+  .action-btn.secondary:hover {
+    background-color: #d1d1d1;
+  }
+  
+  .wiki-resizer {
+    background-color: #e5e5e5;
+  }
+  
+  .wiki-resizer:hover {
+    background-color: #007acc;
+  }
+  
+  .wiki-main {
+    background-color: #ffffff;
+  }
+  
+  .wiki-welcome {
+    color: #666666;
+  }
+  
+  .wiki-welcome h3 {
+    color: #333333;
+  }
+}

@@ -1,0 +1,241 @@
+.document-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.document-list-header {
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--vscode-sideBar-border, #2b2b2b);
+  background-color: var(--vscode-sideBarSectionHeader-background, #2d2d30);
+}
+
+.document-count {
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground, #cccccc99);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.document-list-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.document-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--vscode-sideBar-border, #2b2b2b);
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.document-item:hover {
+  background-color: var(--vscode-list-hoverBackground, #2a2d2e);
+}
+
+.document-item.selected {
+  background-color: var(--vscode-list-activeSelectionBackground, #094771);
+  color: var(--vscode-list-activeSelectionForeground, #ffffff);
+}
+
+.document-item-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.document-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vscode-list-foreground, #cccccc);
+  line-height: 1.3;
+  flex: 1;
+  margin-right: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.document-item.selected .document-title {
+  color: var(--vscode-list-activeSelectionForeground, #ffffff);
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--vscode-descriptionForeground, #cccccc99);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  opacity: 0;
+  transition: all 0.2s;
+  min-width: 20px;
+  text-align: center;
+}
+
+.document-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background-color: var(--vscode-toolbar-hoverBackground, #ffffff1a);
+  color: var(--vscode-errorForeground, #f48771);
+}
+
+.delete-btn.confirm {
+  opacity: 1;
+  background-color: var(--vscode-errorBackground, #5a1d1d);
+  color: var(--vscode-errorForeground, #f48771);
+}
+
+.delete-btn.confirm:hover {
+  background-color: var(--vscode-errorForeground, #f48771);
+  color: var(--vscode-errorBackground, #5a1d1d);
+}
+
+.document-preview {
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground, #cccccc99);
+  line-height: 1.4;
+  margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.document-item.selected .document-preview {
+  color: var(--vscode-list-activeSelectionForeground, #ffffff);
+  opacity: 0.8;
+}
+
+.document-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.document-date {
+  color: var(--vscode-descriptionForeground, #cccccc99);
+}
+
+.document-item.selected .document-date {
+  color: var(--vscode-list-activeSelectionForeground, #ffffff);
+  opacity: 0.7;
+}
+
+.document-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tag {
+  background-color: var(--vscode-badge-background, #4d4d4d);
+  color: var(--vscode-badge-foreground, #ffffff);
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.document-item.selected .tag {
+  background-color: var(--vscode-list-activeSelectionForeground, #ffffff);
+  color: var(--vscode-list-activeSelectionBackground, #094771);
+  opacity: 0.9;
+}
+
+.tag-more {
+  color: var(--vscode-descriptionForeground, #cccccc99);
+  font-size: 10px;
+}
+
+.document-item.selected .tag-more {
+  color: var(--vscode-list-activeSelectionForeground, #ffffff);
+  opacity: 0.7;
+}
+
+.empty-state {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--vscode-descriptionForeground, #cccccc99);
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* Scrollbar styling */
+.document-list-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.document-list-content::-webkit-scrollbar-track {
+  background: var(--vscode-scrollbarSlider-background, #79797966);
+}
+
+.document-list-content::-webkit-scrollbar-thumb {
+  background: var(--vscode-scrollbarSlider-background, #79797966);
+  border-radius: 4px;
+}
+
+.document-list-content::-webkit-scrollbar-thumb:hover {
+  background: var(--vscode-scrollbarSlider-hoverBackground, #646464b3);
+}
+
+/* Light theme support */
+@media (prefers-color-scheme: light) {
+  .document-list-header {
+    background-color: #e8e8e8;
+    border-bottom-color: #e5e5e5;
+  }
+  
+  .document-count {
+    color: #666666;
+  }
+  
+  .document-item {
+    border-bottom-color: #e5e5e5;
+  }
+  
+  .document-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .document-item.selected {
+    background-color: #0078d4;
+  }
+  
+  .document-title {
+    color: #333333;
+  }
+  
+  .document-preview {
+    color: #666666;
+  }
+  
+  .document-date {
+    color: #666666;
+  }
+  
+  .tag {
+    background-color: #e1e1e1;
+    color: #333333;
+  }
+  
+  .tag-more {
+    color: #666666;
+  }
+  
+  .empty-state {
+    color: #666666;
+  }
+}
